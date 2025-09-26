@@ -1,0 +1,123 @@
+/* Style general */
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: #1e1e1e;
+    color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: flex;
+}
+
+main {
+    width: 75%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
+
+h1, h2, h3, h4, h5, p {
+    margin: 0;
+}
+
+/* Style de la zone des visuels */
+
+.visual-container {
+    height: 75%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.visual-container img {
+    transition: transform 0.3s ease;
+}
+
+.visual-container img:hover {
+    transform: scale(1.1);
+}
+
+/* Style de la zone des instructions */
+
+.instruction-container {
+    height: 20%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: rgb(51, 51, 51);
+}
+
+.instruction-container * {
+    padding: 5px;
+}
+
+/* Style de la console */
+
+aside {
+    width: 25%;
+    height: 100%;
+
+    color: lime;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    background-color: black;
+}
+
+#command-container {
+    padding-left: 3%;
+    padding-right: 3%;
+
+    height: 95%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.command-typer {
+    height: 5%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    text-align: center;
+
+    background-color: transparent;
+}
+
+.command-typer input {
+    width: 92%;
+
+    color: lime;
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    text-align: left;
+}
+
+.command-typer p {
+    width: 8%;
+}

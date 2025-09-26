@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <title>Git basis</title>
+</head>
+
+<body>
+    <main>
+        <div class="visual-container">
+            <img src="assets/img/cardboard-open.svg" alt="visuel" id="visualImg">
+        </div>
+
+        <div class="instruction-container">
+            <div>
+                <h1>Bienvenue sur Git Cardboard</h1>
+                <p id="levelDesc">
+                    Apprenez Git de manière ludique ! Sur ce site, vous manipulerez des “cartons” représentant vos
+                    projets
+                    et
+                    commits pour découvrir les commandes Git essentielles tout en jouant. Une façon interactive et
+                    amusante
+                    de maîtriser le versionnage.
+                </p>
+            </div>
+            <p>Pour commencer, tapez<strong>start</strong> !</p>
+
+            <button class="hidden">Niveau suivant</button>
+        </div>
+
+    </main>
+
+    <aside>
+        <div id="command-container"></div>
+
+        <div class="command-typer">
+            <p>></p>
+            <input type="texte" name="console-input" id="console-input" placeholder="Type here">
+        </div>
+    </aside>
+
+    <script src="assets/js/main.js" type="module"></script>
+</body>
+
+</html>
