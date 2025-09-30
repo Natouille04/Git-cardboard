@@ -30,7 +30,7 @@ function waitForCommand(checkCommand, onSuccess) {
 }
 
 export function intro() {
-    levelDesc.innerHTML = "Avant de commencer, c'est quoi GIT ? Git est un outil qui t’aide à garder l’historique de ton projet. Tu peux sauvegarder ton travail, revenir en arrière si tu fais une erreur et créer des branches pour tester des idées sans casser ton projet principal. Si tu bosses avec d’autres personnes, Git t’aide à fusionner vos changements sans tout mélanger. Et avec des plateformes comme GitHub ou GitLab, tu peux mettre ton projet en ligne et collaborer facilement. Ca parait complexe, mais en vrai pas du tout, alors commençons par les basiques";
+    levelDesc.innerHTML = "Avant de commencer, c'est quoi GIT ? Git est un outil qui t’aide à garder l’historique de ton projet. Tu peux sauvegarder ton travail, revenir en arrière si tu fais une erreur et créer des branches pour tester des idées sans casser ton projet principal. Si tu bosses avec d’autres personnes, Git t’aide à fusionner vos changements sans tout mélanger. Et avec des plateformes comme GitHub ou GitLab, tu peux mettre ton projet en ligne et collaborer facilement. Ça paraît complexe, mais en vrai pas du tout. Alors commençons par les bases !";
     button.classList.remove("hidden");
     instructionContainer.children[1].classList.add("hidden");
     button.onclick = level1;
@@ -39,14 +39,14 @@ export function intro() {
 export function level1() {
     setLevel({
         number: 1,
-        desc: "Pour commencer, il nous faut un carton. On en aura besoin tout au long de notre aventure. Ce carton représente un repository, c'est là qu'on va stocker notre code. Pour créer le repo, tape<i>git init</i>.",
+        desc: "Pour commencer, il nous faut un carton. On en aura besoin tout au long de notre aventure. Ce carton représente un repository : c'est là qu'on va stocker notre code. Pour créer le repo, tape <i>git init</i>.",
         imgSrc: "assets/img/cardboard-disasembled.svg"
     });
     instructionContainer.children[1].classList.add("hidden");
 
     waitForCommand(cmd => cmd === "git init", () => {
         img.src = "assets/img/cardboard-open.svg";
-        levelDesc.innerHTML = "Super !! On a maintenant de quoi avancer, maintenant voyons comment remplir ce carton";
+        levelDesc.innerHTML = "Super !! On a maintenant de quoi avancer, voyons comment remplir ce carton.";
         button.classList.remove("hidden");
         button.onclick = level2;
     });
@@ -55,14 +55,14 @@ export function level1() {
 export function level2() {
     setLevel({
         number: 2,
-        desc: "Maintenant, on va remplir ce carton avec des documents, parce qu'un carton vide ce n'est pas très utile. Pour ajouter des fichiers au suivi de Git, on utilise la commande<i>git add nom_du_fichier</i>. Attention, tu ne peux pas ajouter un fichier qui n'existe pas (évidemment).",
+        desc: "Maintenant, on va remplir ce carton avec des documents, parce qu'un carton vide ce n'est pas très utile. Pour ajouter des fichiers au suivi de Git, on utilise la commande <i>git add nom_du_fichier</i>. Attention, tu ne peux pas ajouter un fichier qui n'existe pas (évidemment).",
         imgSrc: "assets/img/document-and-cardboard.svg"
     });
     button.classList.add("hidden");
 
-    waitForCommand(cmd => cmd.startsWith("git add"), () => {
+    waitForCommand(cmd => cmd === ("git add index.html"), () => {
         img.src = "assets/img/document-in-cardboard.svg";
-        levelDesc.innerHTML = "Parfait ! Le carton est plein, dépêchons-nous de l'expédier";
+        levelDesc.innerHTML = "Parfait ! Le carton est plein, dépêchons-nous de l'expédier.";
         button.classList.remove("hidden");
         button.onclick = level3;
     });
@@ -71,7 +71,7 @@ export function level2() {
 export function level3() {
     setLevel({
         number: 3,
-        desc: "Avant d'envoyer ce carton à qui que ce soit, on va l'accompagner d'un message pour expliquer ce qu'on a mis dedans. On va donc faire un 'commit' avec la commande<i>git commit -m \"message\"</i>.",
+        desc: "Avant d'envoyer ce carton à qui que ce soit, on va l'accompagner d'un message pour expliquer ce qu'on a mis dedans. On va donc faire un 'commit' avec la commande <i>git commit -m \"message\"</i>.",
         imgSrc: "assets/img/cardboard-closed.svg"
     });
     button.classList.add("hidden");
@@ -81,7 +81,7 @@ export function level3() {
         if (match) {
             const message = match[1];
             img.src = "assets/img/cardboard-signed.svg";
-            levelDesc.innerHTML = `Très bien, maintenant on ferme le colis et on l'envoie. D'ailleurs, j'aime beaucoup ce message de commit "${message}", quelles paroles de poésie...`;
+            levelDesc.innerHTML = `Très bien, maintenant on ferme le colis et on l'envoie. D'ailleurs, j'aime beaucoup ce message de commit : "${message}", quelles paroles de poésie...`;
             button.classList.remove("hidden");
             button.onclick = level4;
         }
@@ -91,14 +91,14 @@ export function level3() {
 export function level4() {
     setLevel({
         number: 4,
-        desc: "Maintenant que notre colis est rempli et signé, il ne reste plus qu'à l'envoyer. Pour ça, on va faire un push. Sur celui-là, je vous laisse deviner la commande (c'est trop facile sinon ;)",
+        desc: "Maintenant que notre colis est rempli et signé, il ne reste plus qu'à l'envoyer. Pour ça, on va faire un push. Sur celui-là, je te laisse deviner la commande (c'est trop facile sinon ;))",
         imgSrc: "assets/img/cardboard-signed.svg"
     });
     button.classList.add("hidden");
 
     waitForCommand(cmd => cmd === "git push", () => {
         img.classList.add("hidden");
-        levelDesc.innerHTML = "Bon, celui-là n'était pas compliqué, le prochain non plus je te rassure";
+        levelDesc.innerHTML = "Bon, celui-là n'était pas compliqué. Le prochain ne l'est pas non plus, je te rassure.";
         button.classList.remove("hidden");
         button.onclick = level5;
     });
@@ -116,7 +116,7 @@ export function level5() {
     waitForCommand(cmd => cmd === "git pull", () => {
         img.classList.remove("hidden");
         img.src = "assets/img/cardboard-signed.svg";
-        levelDesc.innerHTML = "Super, j'attendais ce colis depuis longtemps (on connaît la poste)";
+        levelDesc.innerHTML = "Super, j'attendais ce colis depuis longtemps (on connaît la poste...).";
         button.classList.remove("hidden");
         button.onclick = level6;
     });
@@ -125,7 +125,7 @@ export function level5() {
 export function level6() {
     setLevel({
         number: 6,
-        desc: "Bon, passons aux choses sérieuses, on va créer une branche qui nous permettra d'envoyer et recevoir des colis différents sans interférer avec les colis normaux. Pour ça, on va faire<i>git checkout -b 'nomdelabranch'</i>. Attention, deux branches ne peuvent pas avoir le même nom.",
+        desc: "Bon, passons aux choses sérieuses. On va créer une branche qui nous permettra d'envoyer et recevoir des colis différents sans interférer avec les colis normaux. Pour ça, on va faire <i>git checkout -b 'nomdelabranche'</i>. Le '-b' sert à indiquer qu'on crée une branche. Il faut donc le retirer si l'on veut juste en sélectionner une. Attention, deux branches ne peuvent pas avoir le même nom.",
         imgSrc: "assets/img/path.svg"
     });
     button.classList.add("hidden");
@@ -135,7 +135,7 @@ export function level6() {
         if (match) {
             const branch = match[1];
             img.src = "assets/img/path2.svg";
-            levelDesc.innerHTML = `"${branch}", pas mal, moi j'aurais pas mis ça mais bon...`;
+            levelDesc.innerHTML = `"${branch}", pas mal ! Moi j'aurais pas mis ça mais bon...`;
             button.classList.remove("hidden");
             button.onclick = level7;
         }
@@ -145,7 +145,7 @@ export function level6() {
 export function level7() {
     setLevel({
         number: 7,
-        desc: "Bon j'ai créé un peu beaucoup de branches, essaye de trouver une commande qui nous aiderait à voir toutes les branches qui ont été créées (<i>git branch</i>)",
+        desc: "Bon, j'ai créé un peu beaucoup de branches... Essaie de trouver une commande qui nous aiderait à voir toutes les branches créées (<i>git branch</i>).",
         imgSrc: "assets/img/path2.svg"
     });
     img.style.filter = "blur(1.5rem)";
@@ -162,14 +162,13 @@ export function level7() {
 export function level8() {
     setLevel({
         number: 8,
-        desc: "Ok, c'est le dernier niveau (et oui déjà, malheureusement), j'aimerais fusionner le contenu de mes deux colis. Pour ça, on va d'abord se placer sur la branche base, puis faire un merge avec blue. (Aide-toi de tes anciennes commandes, la structure est la même).",
+        desc: "Ok, c'est le dernier niveau (et oui déjà, malheureusement). J'aimerais fusionner le contenu de mes deux colis. Pour ça, on va d'abord se placer sur la branche base (Relit le level 6 si besoin), puis faire un merge avec blue. (Aide-toi de tes anciennes commandes, la structure est la même).",
         imgSrc: "assets/img/cardboard-merge.svg"
     });
     button.classList.add("hidden");
 
     waitForCommand(cmd => cmd === "git checkout base", () => {
-        img.src = "assets/img/base-cardboard.svg";
-        levelDesc.innerHTML = "Parfait, on est sur la branche base. Maintenant, fusionne-la avec blue en fessant un merge";
+        levelDesc.innerHTML = "Parfait, on est sur la branche base. Maintenant, fusionne-la avec blue en faisant un merge.";
 
         waitForCommand(cmd => cmd === "git merge blue", () => {
             img.src = "assets/img/blue-cardboard.svg";
@@ -182,7 +181,7 @@ export function level8() {
 
 function end() {
     title.textContent = "FIN";
-    levelDesc.innerHTML = "C'est fini !!! J'espere que ca aurait été sympa et instructif, n'hesite pas a recommencer si certaine commande était pas clair";
+    levelDesc.innerHTML = "C'est fini !!! J'espère que ça a été sympa et instructif. N'hésite pas à recommencer si certaines commandes n'étaient pas claires. Avec la commande<i>level</i>, tu peux sélectionner un niveau précis.";
     img.src = "assets/img/cardboard-signed.svg";
     button.classList.add("hidden");
 }
