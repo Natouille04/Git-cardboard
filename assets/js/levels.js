@@ -29,6 +29,13 @@ function waitForCommand(checkCommand, onSuccess) {
     document.addEventListener("command", handler);
 }
 
+export function intro() {
+    levelDesc.innerHTML = "Avant de commencer, c'est quoi GIT ? Git est un outil qui t’aide à garder l’historique de ton projet. Tu peux sauvegarder ton travail, revenir en arrière si tu fais une erreur et créer des branches pour tester des idées sans casser ton projet principal. Si tu bosses avec d’autres personnes, Git t’aide à fusionner vos changements sans tout mélanger. Et avec des plateformes comme GitHub ou GitLab, tu peux mettre ton projet en ligne et collaborer facilement. Ca parait complexe, mais en vrai pas du tout, alors commençons par les basiques";
+    button.classList.remove("hidden");
+    instructionContainer.children[1].classList.add("hidden");
+    button.onclick = level1;
+}
+
 export function level1() {
     setLevel({
         number: 1,
@@ -155,16 +162,21 @@ export function level7() {
 export function level8() {
     setLevel({
         number: 8,
-        desc: "Ok, c'est le dernier niveau (et oui déjà, malheureusement), j'aimerais fusionner le contenu de mes deux colis. Pour ça, on va faire un merge en sélectionnant un des colis (j'ai déjà selectionée base parce que je suis sympa), puis exécuter la commande en spécifiant avec quelle branche on doit le fusionner. Vu que c'est le dernier niveau, je te laisse cogiter. (Aide-toi de tes anciennes commandes, la structure est la même)",
+        desc: "Ok, c'est le dernier niveau (et oui déjà, malheureusement), j'aimerais fusionner le contenu de mes deux colis. Pour ça, on va d'abord se placer sur la branche base, puis faire un merge avec blue. (Aide-toi de tes anciennes commandes, la structure est la même).",
         imgSrc: "assets/img/cardboard-merge.svg"
     });
     button.classList.add("hidden");
 
-    waitForCommand(cmd => cmd === "git merge blue", () => {
-        img.src = "assets/img/blue-cardboard.svg";
-        levelDesc.innerHTML = "Magnifique, je vais l'envoyée a mon cheval tellement c'est beau !!!";
-        button.classList.remove("hidden");
-        button.onclick = end;
+    waitForCommand(cmd => cmd === "git checkout base", () => {
+        img.src = "assets/img/base-cardboard.svg";
+        levelDesc.innerHTML = "Parfait, on est sur la branche base. Maintenant, fusionne-la avec blue en fessant un merge";
+
+        waitForCommand(cmd => cmd === "git merge blue", () => {
+            img.src = "assets/img/blue-cardboard.svg";
+            levelDesc.innerHTML = "Magnifique, je vais l'envoyer à mon cheval tellement c'est beau !!!";
+            button.classList.remove("hidden");
+            button.onclick = end;
+        });
     });
 }
 

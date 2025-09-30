@@ -1,9 +1,10 @@
-import { level1, level2, level3, level4, level5, level6, level7, level8 } from "./levels.js";
+import { intro, level1, level2, level3, level4, level5, level6, level7, level8 } from "./levels.js";
 
 const commandInput = document.querySelector("#console-input");
 const commandContainer = document.querySelector("#command-container");
 
 const levels = {
+    0: intro,
     1: level1,
     2: level2,
     3: level3,
@@ -64,7 +65,7 @@ function clearConsole() {
 }
 
 function start() {
-    level1();
+    intro();
 }
 
 function goToLevel(fullCmd) {

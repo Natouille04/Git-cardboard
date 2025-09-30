@@ -48,10 +48,6 @@ p {
     align-items: center;
 }
 
-.visual-container img {
-    width: 80%;
-}
-
 /* Style de la zone des instructions */
 
 .instruction-container {
@@ -132,7 +128,7 @@ aside {
 
     main {
         width: 100%;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     aside {
