@@ -1,6 +1,7 @@
 /* Style general */
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
@@ -27,14 +28,19 @@ main {
     display: none;
 }
 
-h1, h2, h3, h4, h5, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
     margin: 0;
 }
 
 /* Style de la zone des visuels */
 
 .visual-container {
-    height: 75%;
+    height: 65%;
     width: 100%;
 
     display: flex;
@@ -43,17 +49,13 @@ h1, h2, h3, h4, h5, p {
 }
 
 .visual-container img {
-    transition: transform 0.3s ease;
-}
-
-.visual-container img:hover {
-    transform: scale(1.1);
+    width: 80%;
 }
 
 /* Style de la zone des instructions */
 
 .instruction-container {
-    height: 20%;
+    height: 35%;
     width: 100%;
 
     display: flex;
@@ -120,4 +122,63 @@ aside {
 
 .command-typer p {
     width: 8%;
+}
+
+@media (max-width: 940px) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        width: 100%;
+        flex-direction: column-reverse;
+    }
+
+    aside {
+        width: 100%;
+        height: 35%;
+    }
+
+    #command-container {
+        height: 85%;
+        padding-left: 2%;
+    }
+
+    .command-typer {
+        height: 25%;
+    }
+
+    .command-typer input {
+        width: 95%;
+    }
+
+    .command-typer p {
+        width: 5%;
+    }
+
+    .visual-container {
+        height: 50%;
+    }
+
+    .instruction-container {
+        height: 50%;
+
+        padding-top: 3%;
+        padding-bottom: 3%;
+
+        overflow-y: auto;
+    }
+
+    .instruction-container h1 {
+        font-size: x-large;
+    }
+
+    .instruction-container p {
+        font-size: 0.98em;
+    }
+
+    .instruction-container div {
+        padding: 0;
+    }
 }

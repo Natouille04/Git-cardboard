@@ -1,7 +1,18 @@
-import { level1 } from "./levels.js";
+import { level1, level2, level3, level4, level5, level6, level7, level8 } from "./levels.js";
 
 const commandInput = document.querySelector("#console-input");
 const commandContainer = document.querySelector("#command-container");
+
+const levels = {
+    1: level1,
+    2: level2,
+    3: level3,
+    4: level4,
+    5: level5,
+    6: level6,
+    7: level7,
+    8: level8
+};
 
 const commandsList = [
     { name: "git init" },
@@ -15,26 +26,22 @@ const commandsList = [
     { name: "git checkout" },
     { name: "git merge" },
     { name: "clear", action: clearConsole },
-    { name: "start", action: start }
+    { name: "start", action: start },
+    { name: "level", action: goToLevel }
 ];
 
 function logInputValue(inputValue) {
     const trimmed = inputValue.trim();
 
     const parts = trimmed.split(" ");
-    const baseCommand = parts.length > 1 ? parts[0] + " " + parts[1] : parts[0];
+    const baseCommand = parts[0] === "git" && parts.length > 1
+        ? parts[0] + " " + parts[1]
+        : parts[0];
 
-    const command = commandsList.find(c => {
-        if (typeof c === "string") {
-            return c.toLowerCase() === baseCommand.toLowerCase();
-        } else if (typeof c === "object") {
-            return c.name.toLowerCase() === baseCommand.toLowerCase();
-        }
-        return false;
-    });
+    const command = commandsList.find(c => c.name.toLowerCase() === baseCommand.toLowerCase());
 
     if (command && typeof command.action === "function") {
-        command.action(inputValue);
+        command.action(trimmed);
         return;
     }
 
@@ -58,6 +65,31 @@ function clearConsole() {
 
 function start() {
     level1();
+}
+
+function goToLevel(fullCmd) {
+    const parts = fullCmd.split(" ");
+    if (parts.length < 2) {
+        logSystemMessage("Usage: level [numéro]");
+        return;
+    }
+
+    const num = parseInt(parts[1], 10);
+    if (levels[num]) {
+        levels[num]();
+        logSystemMessage(`Passage au level ${num}`);
+    } 
+    
+    else {
+        logSystemMessage(`Level ${num} n'existe pas`);
+    }
+}
+
+function logSystemMessage(msg) {
+    const text = document.createElement("p");
+    text.textContent = msg;
+    text.style.color = "yellow";
+    commandContainer.appendChild(text);
 }
 
 commandInput.addEventListener("keydown", function (event) {
