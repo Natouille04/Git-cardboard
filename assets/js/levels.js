@@ -16,6 +16,8 @@ function setLevel({ number, desc, imgSrc, hideButton = true }) {
     title.textContent = `Level ${number}`;
     levelDesc.innerHTML = desc;
     img.src = imgSrc;
+    instructionContainer.children[1].classList.add("hidden");
+
     hideButton ? button.classList.add("hidden") : button.classList.remove("hidden");
 }
 
@@ -26,6 +28,7 @@ function waitForCommand(checkCommand, onSuccess) {
             onSuccess(event.detail);
         }
     }
+
     document.addEventListener("command", handler);
 }
 
@@ -42,11 +45,10 @@ export function level1() {
         desc: "Pour commencer, il nous faut un carton. On en aura besoin tout au long de notre aventure. Ce carton représente un repository : c'est là qu'on va stocker notre code. Pour créer le repo, tape <i>git init</i>.",
         imgSrc: "assets/img/cardboard-disasembled.svg"
     });
-    instructionContainer.children[1].classList.add("hidden");
 
     waitForCommand(cmd => cmd === "git init", () => {
         img.src = "assets/img/cardboard-open.svg";
-        levelDesc.innerHTML = "Super !! On a maintenant de quoi avancer, voyons comment remplir ce carton.";
+        levelDesc.innerHTML = "Super !! Notre premiez carton, il va beaucoup nous servir";
         button.classList.remove("hidden");
         button.onclick = level2;
     });
@@ -55,14 +57,15 @@ export function level1() {
 export function level2() {
     setLevel({
         number: 2,
-        desc: "Maintenant, on va remplir ce carton avec des documents, parce qu'un carton vide ce n'est pas très utile. Pour ajouter des fichiers au suivi de Git, on utilise la commande <i>git add nom_du_fichier</i>. Attention, tu ne peux pas ajouter un fichier qui n'existe pas (évidemment).",
+        desc: "Imaginons que je veux plutôt modifée un carton qui existe deja plutôt que en crée un nouveau, je vais vouloir appelez le carton jusqu'a chez moi pour pouvoir le modifiez, pour ça on va faire un 'clone', la commande sera donc 'git clone ' suivie de l'adresse du carton a récuperer, en conditions réelle, il faut mettre l'URL du repo a copié, mais pour l'exemple on va juste dire que le carton est a<b>Paris<b>",
         imgSrc: "assets/img/document-and-cardboard.svg"
-    });
-    button.classList.add("hidden");
+    }); 
+    img.classList.add("hidden");
 
-    waitForCommand(cmd => cmd === ("git add index.html"), () => {
-        img.src = "assets/img/document-in-cardboard.svg";
-        levelDesc.innerHTML = "Parfait ! Le carton est plein, dépêchons-nous de l'expédier.";
+    waitForCommand(cmd => cmd === "git clone paris", () => {
+        img.src = "assets/img/cardboard-open.svg";
+        levelDesc.innerHTML = "Parfait, ce carton a deja des choses a l'interieures, choses qu'on va pouvoir modifiée";
+        img.classList.remove("hidden");
         button.classList.remove("hidden");
         button.onclick = level3;
     });
@@ -71,6 +74,22 @@ export function level2() {
 export function level3() {
     setLevel({
         number: 3,
+        desc: "Maintenant, on va remplir ce carton avec des documents, parce qu'un carton vide ce n'est pas très utile. Pour ajouter des fichiers au suivi de Git, on utilise la commande<i>git add nom_du_fichier</i>. Attention, tu ne peux pas ajouter un fichier qui n'existe pas (évidemment).",
+        imgSrc: "assets/img/document-and-cardboard.svg"
+    });
+    button.classList.add("hidden");
+
+    waitForCommand(cmd => cmd === ("git add index.html"), () => {
+        img.src = "assets/img/document-in-cardboard.svg";
+        levelDesc.innerHTML = "Parfait ! Le carton est plein, dépêchons-nous de l'expédier.";
+        button.classList.remove("hidden");
+        button.onclick = level4;
+    });
+}
+
+export function level4() {
+    setLevel({
+        number: 4,
         desc: "Avant d'envoyer ce carton à qui que ce soit, on va l'accompagner d'un message pour expliquer ce qu'on a mis dedans. On va donc faire un 'commit' avec la commande <i>git commit -m \"message\"</i>.",
         imgSrc: "assets/img/cardboard-closed.svg"
     });
@@ -83,14 +102,14 @@ export function level3() {
             img.src = "assets/img/cardboard-signed.svg";
             levelDesc.innerHTML = `Très bien, maintenant on ferme le colis et on l'envoie. D'ailleurs, j'aime beaucoup ce message de commit : "${message}", quelles paroles de poésie...`;
             button.classList.remove("hidden");
-            button.onclick = level4;
+            button.onclick = level5;
         }
     });
 }
 
-export function level4() {
+export function level5() {
     setLevel({
-        number: 4,
+        number: 5,
         desc: "Maintenant que notre colis est rempli et signé, il ne reste plus qu'à l'envoyer. Pour ça, on va faire un push. Sur celui-là, je te laisse deviner la commande (c'est trop facile sinon ;))",
         imgSrc: "assets/img/cardboard-signed.svg"
     });
@@ -100,14 +119,14 @@ export function level4() {
         img.classList.add("hidden");
         levelDesc.innerHTML = "Bon, celui-là n'était pas compliqué. Le prochain ne l'est pas non plus, je te rassure.";
         button.classList.remove("hidden");
-        button.onclick = level5;
+        button.onclick = level6;
     });
 }
 
-export function level5() {
+export function level6() {
     setLevel({
-        number: 5,
-        desc: "On me dit dans l'oreillette qu'on vient de recevoir un colis. Pour le récupérer, il faut faire un pull. Encore une fois, je te laisse deviner la commande.",
+        number: 6,
+        desc: "On me dit dans l'oreillette qu'on vient de recevoir un colis. Pour le récupérer, il faut faire un pull. A premiere vu ca resemble beacoup au clone qu'on a fait au debut, la difference est que ici, on recupere juste le nouveau contenu du carton, alors que clone nous donnait tout le carton. Encore une fois, je te laisse deviner la commande.",
         imgSrc: "assets/img/cardboard-signed.svg",
         hideButton: true
     });
@@ -118,14 +137,14 @@ export function level5() {
         img.src = "assets/img/cardboard-signed.svg";
         levelDesc.innerHTML = "Super, j'attendais ce colis depuis longtemps (on connaît la poste...).";
         button.classList.remove("hidden");
-        button.onclick = level6;
+        button.onclick = level7;
     });
 }
 
-export function level6() {
+export function level7() {
     setLevel({
-        number: 6,
-        desc: "Bon, passons aux choses sérieuses. On va créer une branche qui nous permettra d'envoyer et recevoir des colis différents sans interférer avec les colis normaux. Pour ça, on va faire <i>git checkout -b 'nomdelabranche'</i>. Le '-b' sert à indiquer qu'on crée une branche. Il faut donc le retirer si l'on veut juste en sélectionner une. Attention, deux branches ne peuvent pas avoir le même nom.",
+        number: 7,
+        desc: "Bon, passons aux choses sérieuses. J'ai envie d'avoir des colis bleus, mais je ne veux pas interferée avec l'envoie des colis marrons, on va donc créer une ligne d'envoie alternative pour nos cartons, cette ligne ce nomme branch. Pour ça, on va faire<i>git checkout -b 'nomdelabranche'</i>. Le '-b' sert à indiquer qu'on crée une branche. Il faut donc le retirer si l'on veut juste en sélectionner une.",
         imgSrc: "assets/img/path.svg"
     });
     button.classList.add("hidden");
@@ -137,14 +156,14 @@ export function level6() {
             img.src = "assets/img/path2.svg";
             levelDesc.innerHTML = `"${branch}", pas mal ! Moi j'aurais pas mis ça mais bon...`;
             button.classList.remove("hidden");
-            button.onclick = level7;
+            button.onclick = level8;
         }
     });
 }
 
-export function level7() {
+export function level8() {
     setLevel({
-        number: 7,
+        number: 8,
         desc: "Bon, j'ai créé un peu beaucoup de branches... Essaie de trouver une commande qui nous aiderait à voir toutes les branches créées (<i>git branch</i>).",
         imgSrc: "assets/img/path2.svg"
     });
@@ -155,13 +174,13 @@ export function level7() {
         img.style.filter = "blur(0)";
         levelDesc.innerHTML = "Aaaah, mais oui, tout est plus clair maintenant...";
         button.classList.remove("hidden");
-        button.onclick = level8;
+        button.onclick = level9;
     });
 }
 
-export function level8() {
+export function level9() {
     setLevel({
-        number: 8,
+        number: 9,
         desc: "Ok, c'est le dernier niveau (et oui déjà, malheureusement). J'aimerais fusionner le contenu de mes deux colis. Pour ça, on va d'abord se placer sur la branche base (Relit le level 6 si besoin), puis faire un merge avec blue. (Aide-toi de tes anciennes commandes, la structure est la même).",
         imgSrc: "assets/img/cardboard-merge.svg"
     });

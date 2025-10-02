@@ -1,4 +1,6 @@
-import { intro, level1, level2, level3, level4, level5, level6, level7, level8 } from "./levels.js";
+// INITIALISATION
+
+import { intro, level1, level2, level3, level4, level5, level6, level7, level8, level9 } from "./levels.js";
 
 const commandInput = document.querySelector("#console-input");
 const commandContainer = document.querySelector("#command-container");
@@ -12,7 +14,8 @@ const levels = {
     5: level5,
     6: level6,
     7: level7,
-    8: level8
+    8: level8,
+    9: level9
 };
 
 const commandsList = [
@@ -27,9 +30,11 @@ const commandsList = [
     { name: "git checkout" },
     { name: "git merge" },
     { name: "clear", action: clearConsole },
-    { name: "start", action: start },
+    { name: "start", action: intro },
     { name: "level", action: goToLevel }
 ];
+
+// DECLARATION
 
 function logInputValue(inputValue) {
     const trimmed = inputValue.trim();
@@ -50,7 +55,9 @@ function logInputValue(inputValue) {
 
     if (command) {
         text.textContent = trimmed;
-    } else {
+    } 
+    
+    else {
         text.textContent = "Cette commande n'existe pas";
         text.style.color = "red";
     }
@@ -62,10 +69,6 @@ function clearConsole() {
     while (commandContainer.firstChild) {
         commandContainer.removeChild(commandContainer.firstChild);
     }
-}
-
-function start() {
-    intro();
 }
 
 function goToLevel(fullCmd) {
@@ -92,6 +95,8 @@ function logSystemMessage(msg) {
     text.style.color = "yellow";
     commandContainer.appendChild(text);
 }
+
+// EXECUTION
 
 commandInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
